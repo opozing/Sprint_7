@@ -97,4 +97,19 @@ public class CreateOrder {
     public void setColor(List<String> color) {
         this.color = color;
     }
+
+    @Override
+    public String toString() {
+        return "CreateOrder{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", metroStation='" + metroStation + '\'' +
+                ", phone='" + phone + '\'' +
+                ", rentTime='" + rentTime + '\'' +
+                ", deliveryDate='" + deliveryDate + '\'' +
+                ", comment='" + comment + '\'' +
+                ", color='" + color + '\'' +
+                '}';
+    }
 }

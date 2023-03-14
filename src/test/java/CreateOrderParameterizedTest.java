@@ -1,25 +1,25 @@
-import io.restassured.RestAssured;
+import api.client.OrdersClient;
+import io.qameta.allure.junit4.DisplayName;
 import org.example.CreateOrder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import java.util.List;
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.hasKey;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 
 @RunWith(Parameterized.class)
 public class CreateOrderParameterizedTest {
 
     private final List<String> colour;
+    public OrdersClient ordersClient;
 
     public CreateOrderParameterizedTest(List<String> colour) {
         this.colour = colour;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Цвет самоката. Тестовые данные: {0} {1} {2} {3}")
     public static Object[][] getData() {
         return new Object[][] {
                 new List[]{List.of("GRAY")},
@@ -31,20 +31,20 @@ public class CreateOrderParameterizedTest {
 
     @Before
     public void setUp() {
-        RestAssured.baseURI = "http://qa-scooter.praktikum-services.ru/";
+        ordersClient = new OrdersClient();
     }
 
     @Test
-    public void canCreateOrder() {
+    @DisplayName("Заказ можно создать с разными цветами")
+    public void canCreateOrderWithAnyColours() {
         CreateOrder createOrder = new CreateOrder("1", "2", "3", 1, "4",
                 2, "12-12-2000", "5", colour);
 
-        given()
-                .header("Content-type", "application/json")
-                .body(createOrder)
-                .when().post("/api/v1/orders")
-                .then().statusCode(201)
+        ordersClient.create(createOrder)
+                .assertThat().statusCode(201)
+                .and()
                 .body("$", hasKey("track"))
-                .assertThat().body("track", notNullValue());
+                .and()
+                .body("track", notNullValue());
     }
 }

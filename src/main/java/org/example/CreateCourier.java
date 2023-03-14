@@ -34,4 +34,13 @@ public class CreateCourier {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
+    @Override
+    public String toString() {
+        return "CreateCourier{" +
+                "login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                '}';
+    }
 }
