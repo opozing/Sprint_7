@@ -13,7 +13,7 @@ public class CourierClient {
     @Step("Create courier {createCourier}")
     public ValidatableResponse create(CreateCourier createCourier) {
         return given()
-                .header("Content-type", "application/json")
+                .header(HEADERS[0], HEADERS[1])
                 .body(createCourier)
                 .when()
                 .post(BASE_URL + COURIER_URL)

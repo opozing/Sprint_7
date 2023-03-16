@@ -11,7 +11,7 @@ public class OrdersClient {
     @Step("Create order {createOrder}")
     public ValidatableResponse create(CreateOrder createOrder) {
         return given()
-                .header("Content-type", "application/json")
+                .header(HEADERS[0], HEADERS[1])
                 .body(createOrder)
                 .when()
                 .post(BASE_URL + ORDER_URL)
@@ -21,10 +21,9 @@ public class OrdersClient {
     @Step("Get orderList {getOrder}")
     public ValidatableResponse getOrder() {
         return given()
-                .header("Content-type", "application/json")
+                .header(HEADERS[0], HEADERS[1])
                 .when()
                 .get(ORDER_URL)
                 .then();
     }
-
 }
