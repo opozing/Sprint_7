@@ -19,7 +19,7 @@ public class CreateOrderParameterizedTest {
         this.colour = colour;
     }
 
-    @Parameterized.Parameters(name = "Цвет самоката. Тестовые данные: {0} {1} {2} {3}")
+    @Parameterized.Parameters(name = "Цвет самоката. Тестовые данные: {0} {0} {2} {3}")
     public static Object[][] getData() {
         return new Object[][] {
                 new List[]{List.of("GRAY")},
