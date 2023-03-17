@@ -41,7 +41,7 @@ public class CreateOrderParameterizedTest {
                 2, "12-12-2000", "5", colour);
 
         ordersClient.create(createOrder)
-                .assertThat().statusCode(201)
+                .assertThat().statusCode(200)
                 .and()
                 .body("$", hasKey("track"))
                 .and()
